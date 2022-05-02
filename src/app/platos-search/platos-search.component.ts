@@ -38,6 +38,8 @@ export class PlatosSearchComponent implements OnInit {
 
   tabCambiado()
   {
+    this.busqueda = ''
+    this.selectedAlergenos = []
     this.tabEvent.emit()
   }
 
@@ -55,6 +57,7 @@ export class PlatosSearchComponent implements OnInit {
       allowSearchFilter: true,
       enableCheckAll: false,
       searchPlaceholderText: 'Buscar alérgenos',
+      noFilteredDataAvailablePlaceholderText: ''
     };
     this.temaHotel()
   }
