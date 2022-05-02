@@ -1,0 +1,23 @@
+<div class="accordion" id="accordionFlushExample">
+  <div *ngFor="let plato of platosArray | slice : 0 : 100; let i=index" class="accordion-item" [attr.id]="'accordion_' + i" >
+    <h2 class="accordion-header" [id]="'heading'+i" >
+      <button [ngClass]="{ 'collapsed': i != 0 }" [attr.data-bs-target]="'#collapse'+i" [attr.aria-controls]="'collapse'+i" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" aria-expanded="false">
+        {{plato.description}}
+      </button>
+    </h2>
+    <div [id]="'collapse'+i" [ngClass]="{ 'show': i == 0 }" [attr.aria-labelledby]="'heading'+i" class="accordion-collapse collapse"  data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body" >
+        <div *ngIf="plato.allergens.length <= 0">
+        <p><strong >Sin Alérgenos</strong></p>
+        <p><strong >Allergen Free</strong></p>
+        <p><strong >Allergenfrei</strong></p>
+        </div>
+        <div *ngIf="plato.allergens.length > 0">
+        <p><strong *ngFor="let alergeno of plato.allergens">{{alergeno.alergenoEs}}, </strong></p>
+        <p><strong *ngFor="let alergeno of plato.allergens">{{alergeno.alergenoEn}}, </strong></p>
+        <p><strong *ngFor="let alergeno of plato.allergens">{{alergeno.alergenoDe}}, </strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

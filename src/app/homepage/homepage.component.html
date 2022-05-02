@@ -1,0 +1,9 @@
+<div class="container"  >
+    <div class="text-center" id="logo">
+        <a> 
+            <img [src]="getLogo()" alt="Ups!" class="d-inline-block align-text-top">
+        </a>
+    </div>
+    <app-platos-search [hotel]="hotel" (buscarEvent)="showPlatos($event)" (filtrosEvent)="showAlergenos($event)" (tabEvent)="cambioTab()"></app-platos-search>
+    <app-platoslist [platosArray]="platosFiltradosArray"></app-platoslist>
+</div>

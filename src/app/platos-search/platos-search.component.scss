@@ -1,0 +1,13 @@
+$color-fondo: var(--color-fondo);
+$color-etiquetas: var(--color-etiquetas);
+
+#buscar {
+    height: 40px;
+}
+#barra {
+    background-color: $color-fondo;
+}
+
+.nav-link {
+    color: #2C2926;
+}

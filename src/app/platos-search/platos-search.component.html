@@ -1,0 +1,20 @@
+<nav class="navbar-light" id="barra">
+    <div class="nav nav-tabs container-fluid" id="nav-tab" role="tablist">
+      <button class="nav-link active" id="nav-plato-tab" data-bs-toggle="tab" data-bs-target="#nav-plato" type="button" role="tab" aria-controls="nav-plato" aria-selected="true" (click)="tabCambiado()">Platos</button>
+      <button class="nav-link" id="nav-alergeno-tab" data-bs-toggle="tab" data-bs-target="#nav-alergeno" type="button" role="tab" aria-controls="nav-alergeno" aria-selected="false" (click)="tabCambiado()">Alérgenos</button>
+    </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-plato" role="tabpanel" aria-labelledby="nav-plato-tab">
+    <input class="container-md" type="text" placeholder="Buscar platos" [(ngModel)]="busqueda" name="busqueda" (input)="buscarPlato()" id="buscar">
+  </div>
+    <div class="tab-pane fade" id="nav-alergeno" role="tabpanel" aria-labelledby="nav-alergeno-tab">
+      <ng-multiselect-dropdown
+        placeholder="Seleccionar alérgenos"
+        [settings]="dropdownSettings"
+        [data]="alergenos"
+        [(ngModel)]="selectedAlergenos"
+        (onSelect)="alergenosFiltrados()"
+        (onDeSelect)="alergenosFiltrados()"></ng-multiselect-dropdown>      
+    </div>
+</div>
