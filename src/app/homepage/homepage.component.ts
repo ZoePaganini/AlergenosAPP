@@ -23,9 +23,7 @@ export class HomepageComponent implements OnInit {
     private route: ActivatedRoute,
     private platosService: PlatoService
   ) 
-  {
-
-  }
+  {}
 
   showPlatos(busqueda: any) 
   {
@@ -57,9 +55,6 @@ export class HomepageComponent implements OnInit {
                 )
                 break
     }
-   
-
-    console.log(this.platosFiltradosArray) 
   }
 
   getLogo(): string {
@@ -72,7 +67,6 @@ export class HomepageComponent implements OnInit {
   }
 
   ngOnInit() {   
-  
     this.hotel = this.route.snapshot.params['hotel']
     this.platosService.getPlatos(this.hotel).subscribe(
       platos =>{ 

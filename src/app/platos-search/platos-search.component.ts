@@ -26,7 +26,7 @@ export class PlatosSearchComponent implements OnInit {
   busqueda: string = ''
   alergenos: any
   selectedAlergenos = []
-  dropdownSettings: IDropdownSettings = {}
+  dropdownConfig: IDropdownSettings = {}
 
   constructor(
     private platoService: PlatoService,
@@ -49,7 +49,7 @@ export class PlatosSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.alergenos = Object.values(AlergenoEs).map(item => String(item));
-    this.dropdownSettings = {
+    this.dropdownConfig = {
       singleSelection: false,
       idField: '',
       textField: '',
