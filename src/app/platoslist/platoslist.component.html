@@ -13,9 +13,9 @@
         <p><strong >Allergenfrei</strong></p>
         </div>
         <div *ngIf="plato.allergens.length > 0">
-        <p><strong *ngFor="let alergeno of plato.allergens">{{alergeno.alergenoEs}}, </strong></p>
-        <p><strong *ngFor="let alergeno of plato.allergens">{{alergeno.alergenoEn}}, </strong></p>
-        <p><strong *ngFor="let alergeno of plato.allergens">{{alergeno.alergenoDe}}, </strong></p>
+        <p><strong *ngFor="let alergeno of plato.allergens; let indiceEs=index">{{alergeno.alergenoEs}}<strong *ngIf="indiceEs<plato.allergens.length - 1">, </strong> </strong></p>
+        <p><strong *ngFor="let alergeno of plato.allergens; let indiceEn=index">{{alergeno.alergenoEn}}<strong *ngIf="indiceEn<plato.allergens.length - 1 ">, </strong> </strong></p>
+        <p><strong *ngFor="let alergeno of plato.allergens; let indiceDe=index">{{alergeno.alergenoDe}}<strong *ngIf="indiceDe<plato.allergens.length - 1">, </strong> </strong></p>
         </div>
       </div>
     </div>

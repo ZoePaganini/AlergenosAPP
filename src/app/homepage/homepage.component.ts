@@ -10,9 +10,9 @@ import { PlatoService } from '../plato.service';
 })
 export class HomepageComponent implements OnInit {
 
-  readonly logoFamily = "/assets/Viva_Family.svg"
-  readonly logoAdults = "/assets/Viva_Adults.svg"
-  readonly logoJaumell = "/assets/SonJaumell.svg"
+  readonly logoFamily = "/assets/Viva_Family.png"
+  readonly logoAdults = "/assets/Viva_Adults.png"
+  readonly logoJaumell = "/assets/SonJaumell.png"
 
   hotel!: string
   platosArray: Plato[] = []
