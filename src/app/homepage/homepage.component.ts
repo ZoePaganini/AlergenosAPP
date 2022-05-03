@@ -15,7 +15,7 @@ export class HomepageComponent implements OnInit {
   readonly logoJaumell = "/assets/Son_Jaumell.svg"
 
   hotel!: string
-  platosArray: Plato[] = []
+  platosArray!: Plato[]
   platosFiltradosArray: Plato[] = []
 
 

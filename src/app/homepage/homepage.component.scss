@@ -1,7 +1,16 @@
+$base-color: var(--color-etiquetas);
+
 #contenedor {
     max-width: 750px;
 }
 img {
     width: 250px;
     align-self: center;
+}
+
+.spinner-border {
+    color: $base-color;
+    width: 75px;
+    height: 75px;
+    margin-top: 200px;
 }

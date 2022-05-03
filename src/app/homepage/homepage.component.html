@@ -3,5 +3,10 @@
             <img [src]="getLogo()" alt="Ups!" class="d-inline-block align-text-top"> 
     </div>
     <app-platos-search [hotel]="hotel" (buscarEvent)="showPlatos($event)" (filtrosEvent)="showAlergenos($event)" (tabEvent)="cambioTab()"></app-platos-search>
+    <div *ngIf="!platosArray" class="d-flex justify-content-center" id="spinner">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
     <app-platoslist [platosArray]="platosFiltradosArray"></app-platoslist>
 </div>
