@@ -9,13 +9,17 @@ import { PlatosSearchComponent } from './platos-search/platos-search.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { FormsModule } from '@angular/forms';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { ErrorModalComponent } from './error-modal/error-modal.component';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     PlatoslistComponent,
     PlatosSearchComponent,
-    HomepageComponent
+    HomepageComponent,
+    ErrorModalComponent
   ],
   imports: [
     BrowserModule,

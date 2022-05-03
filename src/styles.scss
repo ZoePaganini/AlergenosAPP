@@ -1,4 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+
+@import "../node_modules/ng-multiselect-dropdown/themes/ng-multiselect-dropdown.theme.scss";
+
+:root {
+    --color-etiquetas: #FF6900;
+}
+
+$base-color: var(--color-etiquetas);
+
+
+
 body {
-    background-color: #fcfeff		;
+    background-color: #fcfeff;
 }

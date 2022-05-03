@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Plato } from '../plato';
@@ -8,6 +9,7 @@ import { PlatoService } from '../plato.service';
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss']
 })
+
 export class HomepageComponent implements OnInit {
 
   readonly logoFamily = "/assets/VIVA_Family.svg"
@@ -16,12 +18,12 @@ export class HomepageComponent implements OnInit {
 
   hotel!: string
   platosArray!: Plato[]
-  platosFiltradosArray: Plato[] = []
-
+  platosFiltradosArray!: Plato[] 
+  mensajeError!: string
 
   constructor(
     private route: ActivatedRoute,
-    private platosService: PlatoService
+    private platosService: PlatoService,
   ) 
   {}
 
@@ -51,7 +53,6 @@ export class HomepageComponent implements OnInit {
             }
           )
         )
-        console.log(this.platosFiltradosArray)
     } else
     {
       this.platosFiltradosArray = this.platosArray
@@ -63,7 +64,25 @@ export class HomepageComponent implements OnInit {
       case '04':
       case '15': return this.logoAdults
       case '21': return this.logoJaumell
-      default: return this.logoFamily
+      case '02':
+      case '05':
+      case '16':
+      case '22': return this.logoFamily 
+      default: return '?'
+    }
+  }
+
+  getHotelCorrecto()
+  {
+    switch(this.hotel) {
+      case '04':
+      case '15': return true
+      case '21': return true
+      case '02':
+      case '05':
+      case '16':
+      case '22': return true 
+      default: return false
     }
   }
 
@@ -73,7 +92,11 @@ export class HomepageComponent implements OnInit {
       platos =>{ 
         this.platosArray = platos
         this.platosFiltradosArray = platos
+      },
+      error => {
+        this.mensajeError = 'Ha ocurrido un error a la hora de recoger los datos: ' + error.status + ' ' + error.statusText
+        console.log(error)
       }
-    );
+    )
   }
 }
