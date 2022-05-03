@@ -39,21 +39,22 @@ export class HomepageComponent implements OnInit {
 
   showAlergenos(selectedItems: string[])
   {
-    switch(selectedItems.length)
+    if(selectedItems.length != 0)
     {
-      case 0:   this.platosFiltradosArray = this.platosArray
-                break
-      default:  this.platosFiltradosArray = []  
-                this.platosArray.forEach(
-                  plato => plato.allergens.filter(
-                    alergeno => {
-                      if(selectedItems.includes(alergeno.alergenoEs) && !this.platosFiltradosArray.includes(plato)) {
-                        this.platosFiltradosArray.push(plato)
-                      }
-                    }
-                  )
-                )
-                break
+      this.platosFiltradosArray = []  
+        this.platosArray.forEach(
+          plato => plato.allergens.filter(
+            alergeno => {
+              if(selectedItems.includes(alergeno.alergenoEs) && !this.platosFiltradosArray.includes(plato)) {
+                this.platosFiltradosArray.push(plato)
+              }
+            }
+          )
+        )
+        console.log(this.platosFiltradosArray)
+    } else
+    {
+      this.platosFiltradosArray = this.platosArray
     }
   }
 
