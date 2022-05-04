@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Plato } from '../plato';
@@ -12,8 +11,8 @@ import { PlatoService } from '../plato.service';
 
 export class HomepageComponent implements OnInit {
 
-  readonly logoFamily = "/assets/VIVA_Family.svg"
-  readonly logoAdults = "/assets/VIVA_Adults.svg"
+  readonly logoFamily = "/assets/Viva_Family.svg"
+  readonly logoAdults = "/assets/Viva_Adults.svg"
   readonly logoJaumell = "/assets/Son_Jaumell.svg"
 
   hotel!: string
@@ -88,15 +87,15 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit() {   
     this.hotel = this.route.snapshot.params['hotel']
-    this.platosService.getPlatos(this.hotel).subscribe(
-      platos =>{ 
+    this.platosService.getPlatos(this.hotel).subscribe({
+      next: (platos) => { 
         this.platosArray = platos
         this.platosFiltradosArray = platos
       },
-      error => {
+      error: (error) => {
         this.mensajeError = 'Ha ocurrido un error a la hora de recoger los datos: ' + error.status + ' ' + error.statusText
         console.log(error)
       }
-    )
+    });
   }
 }

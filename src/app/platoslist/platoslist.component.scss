@@ -1,3 +1,19 @@
+$color-list-letra: var(--color-etiquetas);
+$color-list-fondo: var(--color-fondo)
+;
+
+.accordion-button:not(.collapsed) {
+    color: $color-list-letra;
+    background-color: $color-list-fondo;
+    box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
+}
+
+.accordion-button:focus {
+    z-index: 3;
+    border-color: $color-list-fondo;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem $color-list-fondo;
+}
 
 .idioma {
     width: 20px;

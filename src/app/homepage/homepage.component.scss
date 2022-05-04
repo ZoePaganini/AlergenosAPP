@@ -1,4 +1,4 @@
-$base-color: var(--color-etiquetas);
+$color-tema: var(--color-etiquetas);
 
 #contenedor {
     max-width: 750px;
@@ -9,7 +9,7 @@ img {
 }
 
 .spinner-border {
-    color: $base-color;
+    color: $color-tema;
     width: 75px;
     height: 75px;
     margin-top: 200px;

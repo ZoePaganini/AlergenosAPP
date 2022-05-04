@@ -7,7 +7,7 @@ import { PlatoService } from '../plato.service';
 @Component({
   selector: 'app-platos-search',
   templateUrl: './platos-search.component.html',
-  styleUrls: ['./platos-search.component.scss']
+  styleUrls: ['./platos-search.component.scss', ]
 })
 export class PlatosSearchComponent implements OnInit {
 
