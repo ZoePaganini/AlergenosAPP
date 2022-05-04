@@ -17,6 +17,9 @@ export class PlatosSearchComponent implements OnInit {
   readonly temaFamily = "#FFF0E6"
   readonly temaAdults = "#E7EFF0"
   readonly temaJaumell = "#F6F0E7"
+  readonly temaFamilyFlecha = "invert(49%) sepia(39%) saturate(4641%) hue-rotate(13deg) brightness(103%) contrast(101%)"
+  readonly temaAdultsFlecha = "invert(24%) sepia(8%) saturate(7497%) hue-rotate(148deg) brightness(92%) contrast(88%)"
+  readonly temaJaumellFlecha = "invert(24%) sepia(8%) saturate(7497%) hue-rotate(148deg) brightness(92%) contrast(88%)"
 
   @Output() public buscarEvent = new EventEmitter<string>()
   @Output() public filtrosEvent = new EventEmitter<string[]>()
@@ -68,12 +71,15 @@ export class PlatosSearchComponent implements OnInit {
       case '04':
       case '15':  document.documentElement.style.setProperty('--color-fondo', this.temaAdults);
                   document.documentElement.style.setProperty('--color-etiquetas', this.temaAdultsEtiquetas);
+                  document.documentElement.style.setProperty('--color-flecha', this.temaAdultsFlecha)
                   break;
       case '21':  document.documentElement.style.setProperty('--color-fondo', this.temaJaumell);
                   document.documentElement.style.setProperty('--color-etiquetas', this.temaJaumellEtiquetas);
+                  document.documentElement.style.setProperty('--color-flecha', this.temaJaumellFlecha)
                   break;
       default:    document.documentElement.style.setProperty('--color-fondo', this.temaFamily);
                   document.documentElement.style.setProperty('--color-etiquetas', this.temaFamilyEtiquetas);
+                  document.documentElement.style.setProperty('--color-flecha', this.temaFamilyFlecha)
                   break;
     }
   }
