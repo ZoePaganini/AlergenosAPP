@@ -22,9 +22,10 @@ export class HomepageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private platosService: PlatoService,
+    private platosService: PlatoService
   ) 
-  {}
+  {
+  }
 
   showPlatos(busqueda: any) 
   {
