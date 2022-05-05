@@ -1,16 +1,18 @@
-<div class="accordion" id="accordionFlushExample">
+<div class="accordion" id="platosList">
   <div *ngFor="let plato of platosArray; let i=index" class="accordion-item" [attr.id]="'accordion_' + i" >
     <h2 class="accordion-header" [id]="'heading'+i" >
       <button [ngClass]="{ 'collapsed': i != 0 }" [attr.data-bs-target]="'#collapse'+i" [attr.aria-controls]="'collapse'+i" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" aria-expanded="false">
         {{plato.description}}                       
-        <div  [id]="'collapse'+i" [ngClass]="{ 'show': i == 0 }" [attr.aria-labelledby]="'heading'+i" class="accordion-collapse collapse"  data-bs-parent="#accordionFlushExample" *ngIf="esEscritorio == true && plato.allergens.length > 0">
+        <div  [id]="'collapse'+i" [ngClass]="{ 'show': i == 0 }" [attr.aria-labelledby]="'heading'+i" class="accordion-collapse collapse"  data-bs-parent="#platosList" *ngIf="esEscritorio == true">
           <div id="contenedor">
-          <a class="container text-center" *ngFor="let alergeno of plato.allergens"><img *ngIf="alergeno.alergenoEs != null" id="alergenoLogo" [src]="'assets/alergenos/' + alergeno.alergenoEs + '.svg'"></a>
+          <a class="text-center" *ngFor="let alergeno of plato.allergens">
+            <img *ngIf="alergeno.alergenoEs != null" id="alergenoLogo" [src]="'assets/alergenos/' + alergeno.alergenoEs + '.svg'">
+          </a>
           </div>
         </div>
       </button>
     </h2>
-    <div [id]="'collapse'+i" [ngClass]="{ 'show': i == 0 }" [attr.aria-labelledby]="'heading'+i" class="accordion-collapse collapse"  data-bs-parent="#accordionFlushExample">
+    <div [id]="'collapse'+i" [ngClass]="{ 'show': i == 0 }" [attr.aria-labelledby]="'heading'+i" class="accordion-collapse collapse"  data-bs-parent="#platosList">
       <div id="svgAlergenos" class="text-center" *ngIf="esEscritorio == false && plato.allergens.length > 0">
         <a *ngFor="let alergeno of plato.allergens"><img *ngIf="alergeno.alergenoEs != null" id="alergenoLogo" [src]="'assets/alergenos/' + alergeno.alergenoEs + '.svg'"></a>
       </div>
