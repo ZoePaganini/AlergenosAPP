@@ -30,8 +30,7 @@ export class HomepageComponent implements OnInit {
   showPlatos(busqueda: any) 
   {
     this.platosFiltradosArray = this.platosArray.filter(plato => 
-      plato.description.toUpperCase().indexOf(busqueda.toString().toUpperCase()) != -1
-    )    
+      plato.description.toUpperCase().indexOf(busqueda.toString().toUpperCase()) != -1)
   }
 
   cambioTab()

@@ -8,7 +8,7 @@
   <div class="tab-pane fade show active" id="nav-plato" role="tabpanel" aria-labelledby="nav-plato-tab">
     <input class="container-md" type="text" placeholder="Buscar platos" [(ngModel)]="busqueda" name="busqueda" (input)="buscarPlato()" id="buscar">
   </div>
-    <div class="tab-pane fade" id="nav-alergeno" role="tabpanel" aria-labelledby="nav-alergeno-tab">
+  <div class="tab-pane fade" id="nav-alergeno" role="tabpanel" aria-labelledby="nav-alergeno-tab">
       <ng-multiselect-dropdown
         placeholder="Seleccionar alérgenos"
         [settings]="dropdownConfig"
@@ -16,5 +16,5 @@
         [(ngModel)]="selectedAlergenos"
         (onSelect)="alergenosFiltrados()"
         (onDeSelect)="alergenosFiltrados()"></ng-multiselect-dropdown>      
-    </div>
+  </div>   
 </div>

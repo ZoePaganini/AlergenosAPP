@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { AlergenoEs } from '../plato';
+import { AlergenoEs, Type } from '../plato';
 import { PlatoService } from '../plato.service';
 
 
@@ -51,7 +51,7 @@ export class PlatosSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.alergenos = Object.values(AlergenoEs).map(item => String(item));
+    this.alergenos = Object.values(AlergenoEs).map(item => String(item))
     this.dropdownConfig = {
       singleSelection: false,
       idField: '',
@@ -61,7 +61,7 @@ export class PlatosSearchComponent implements OnInit {
       enableCheckAll: false,
       searchPlaceholderText: 'Buscar alérgenos',
       noFilteredDataAvailablePlaceholderText: ''
-    };
+    }
     this.temaHotel()
   }
 
