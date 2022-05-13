@@ -7,9 +7,14 @@ $color-flecha: var(--color-flecha);
     width: 35px;
 }
 
-#contenedor {
+.contenedor {
     margin-left: 30px;
     left: 50%;
+}
+
+.tipo {
+
+    text-align: right;
 }
 
 .accordion-button:not(.collapsed) {
