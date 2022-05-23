@@ -10,6 +10,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { FormsModule } from '@angular/forms';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ErrorModalComponent } from './error-modal/error-modal.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 
@@ -26,7 +27,8 @@ import { ErrorModalComponent } from './error-modal/error-modal.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    InfiniteScrollModule
   ],
   providers: [],
   bootstrap: [AppComponent]

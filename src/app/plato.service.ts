@@ -10,7 +10,9 @@ import { Plato } from './plato';
 
 export class PlatoService {
 
-  private platosUrl = "http://192.168.93.179:45455/api/Alergenos/"
+  public _platosArray!: Plato[]
+
+  private platosUrl = "https://alergenosapiviva.azurewebsites.net/api/Alergenos/"
 
 
   httpOptions = {
@@ -23,19 +25,12 @@ export class PlatoService {
 
 
   getPlatos(hotel: string): Observable<Plato[]> {
+    this.http.get<Plato[]>(this.platosUrl + hotel).subscribe({
+      next: (platos) => { 
+        this._platosArray = platos
+      },
+    });
     return this.http.get<Plato[]>(this.platosUrl + hotel)
   }
 
-
-  /*getPlato(plato: string): Observable<Plato> {
-    const url = `${this.platosUrl}+${plato}`;
-    return this.http.get<Plato>(url);
-  }
-
-  searchPlatos(term: string): Observable<Plato[]> {
-    if (!term.trim()) {
-      return of([]);
-    }
-    return this.http.get<Plato[]>(`${this.platosUrl}/?name=${term}`);
-  }*/
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import {  Plato } from '../plato';
 import "@angular/compiler";
 import { DeviceDetectorService } from 'ngx-device-detector';
@@ -10,14 +10,57 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 })
 export class PlatoslistComponent implements OnInit {
 
+  mensajeError!: string
+  sum = 50;
+  direction = "";
   esEscritorio: any
-  @Input() platosArray!: Plato[];
+  @Input() hotel!: string
+  @Input() platosArray!: Plato[]
+  platosArraySlice!: Plato[]
   constructor(
-    private dispositivoService: DeviceDetectorService
+    private dispositivoService: DeviceDetectorService,
   ) {
     this.esEscritorio = this.dispositivoService.isDesktop()
+    console.log(this.platosArray)
    }
 
-  ngOnInit(): void {}
-  
+  ngOnInit(): void {
+    this.appendItems()
+    console.log(this.platosArray)
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    //Add '${implements OnChanges}' to the class.
+    this.platosArraySlice = this.platosArray
+    this.appendItems()
+  }  
+
+  onScrollDown(ev: any) {
+
+    this.sum += 50;
+    this.appendItems();
+    console.log("Scroll Down")
+  }
+
+  onScrollUp(ev: any) {
+    this.sum += 50;
+    this.prependItems();
+
+  }
+  appendItems() {
+    this.addItems("push");
+  }
+
+  prependItems() {
+    this.addItems("unshift");
+  }
+
+  addItems(_method: string) {
+      if( _method === 'push'){
+        this.platosArraySlice = this.platosArray.slice(0, this.sum)
+      }else if( _method === 'unshift'){
+        this.platosArraySlice = this.platosArray.slice(this.sum, 0)
+      }
+  }
 }

@@ -5,7 +5,7 @@
     </div>
     <app-platos-search [hotel]="hotel" (buscarEvent)="showPlatos($event)" (filtrosEvent)="showAlergenos($event)" (tabEvent)="cambioTab()"></app-platos-search>
     <app-error-modal *ngIf="mensajeError" [error]="mensajeError"></app-error-modal>
-    <div *ngIf="!platosArray && !mensajeError" class="d-flex justify-content-center" id="spinner">
+    <div *ngIf="!platosFiltradosArray && !mensajeError" class="d-flex justify-content-center" id="spinner">
       <div class="spinner-border" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
@@ -13,5 +13,5 @@
     <div *ngIf="platosFiltradosArray && platosFiltradosArray.length == 0">
       <p class="text-center">No se han encontrado resultados.</p>
     </div>
-    <app-platoslist [platosArray]="platosFiltradosArray"></app-platoslist>
+    <app-platoslist *ngIf="platosFiltradosArray" [hotel]="hotel" [platosArray]="platosFiltradosArray"></app-platoslist>
 </div>

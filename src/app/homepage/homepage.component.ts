@@ -10,7 +10,6 @@ import { PlatoService } from '../plato.service';
 })
 
 export class HomepageComponent implements OnInit {
-
   readonly logoFamily = "/assets/Viva_Family.svg"
   readonly logoAdults = "/assets/Viva_Adults.svg"
   readonly logoJaumell = "/assets/Son_Jaumell.svg"
@@ -22,7 +21,7 @@ export class HomepageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private platosService: PlatoService
+    public platosService: PlatoService
   ) 
   {
   }
@@ -91,6 +90,7 @@ export class HomepageComponent implements OnInit {
       next: (platos) => { 
         this.platosArray = platos
         this.platosFiltradosArray = platos
+        console.log("Platos cargados")
       },
       error: (error) => {
         this.mensajeError = 'Ha ocurrido un error a la hora de recoger los datos: ' + error.status + ' ' + error.statusText
