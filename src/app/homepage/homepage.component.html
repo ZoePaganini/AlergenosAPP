@@ -3,7 +3,7 @@
     <div class="text-center" id="logo">    
             <img [src]="getLogo()" alt="Ups!" class="d-inline-block align-text-top"> 
     </div>
-    <app-platos-search [hotel]="hotel" (buscarEvent)="showPlatos($event)" (filtrosEvent)="showAlergenos($event)" (tabEvent)="cambioTab()"></app-platos-search>
+    <app-platos-search [tpvs]="this.distinctTPVs" [hotel]="hotel" (buscarEvent)="showPlatos($event)" (filtrosEvent)="showAlergenos($event)" (tabEvent)="cambioTab()" (tpvEvent)="tpvPlatos($event)"></app-platos-search>
     <app-error-modal *ngIf="mensajeError" [error]="mensajeError"></app-error-modal>
     <div *ngIf="!platosFiltradosArray && !mensajeError" class="d-flex justify-content-center" id="spinner">
       <div class="spinner-border" role="status">

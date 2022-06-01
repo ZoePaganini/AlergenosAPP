@@ -3,7 +3,7 @@
   <div *ngFor="let plato of platosArraySlice; let i=index" class="accordion-item" [attr.id]="'accordion_' + i" >
     <h2 class="accordion-header" [id]="'heading'+i" >
       <button [ngClass]="{ 'collapsed': i != 0 }" [attr.data-bs-target]="'#collapse'+i" [attr.aria-controls]="'collapse'+i" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" aria-expanded="false">
-        {{plato.description}} ({{plato.type}})                
+        {{plato.description}} ({{plato.type}} {{plato.tpv?.descripcion}})                
         <div  [id]="'collapse'+i" [ngClass]="{ 'show': i == 0 }" [attr.aria-labelledby]="'heading'+i" class="accordion-collapse collapse"  data-bs-parent="#platosList" *ngIf="esEscritorio == true">
           <div class="contenedor">
           <a class="text-center" *ngFor="let alergeno of plato.allergens">

@@ -12,8 +12,8 @@ export class PlatoService {
 
   public _platosArray!: Plato[]
 
-  private platosUrl = "https://alergenosapiviva.azurewebsites.net/api/Alergenos/"
-
+  //private platosUrl = "https://alergenosapiviva.azurewebsites.net/api/Alergenos/"
+  private platosUrl = "https://localhost:7183/api/Alergenos/"
 
   httpOptions = {
     headers: new HttpHeaders({

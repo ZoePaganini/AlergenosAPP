@@ -21,12 +21,10 @@ export class PlatoslistComponent implements OnInit {
     private dispositivoService: DeviceDetectorService,
   ) {
     this.esEscritorio = this.dispositivoService.isDesktop()
-    console.log(this.platosArray)
    }
 
   ngOnInit(): void {
     this.appendItems()
-    console.log(this.platosArray)
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -40,7 +38,6 @@ export class PlatoslistComponent implements OnInit {
 
     this.sum += 50;
     this.appendItems();
-    console.log("Scroll Down")
   }
 
   onScrollUp(ev: any) {
