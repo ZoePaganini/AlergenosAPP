@@ -18,13 +18,12 @@ export class HomepageTPVComponent implements OnInit {
   hotel!: string
   platosArray!: Plato[]
   platosFiltradosArray!: Plato[]
-  platosFiltradoTPV!: Plato[]
   mensajeError!: string
   tpvs: Tpv[] = []
   distinctTPVs!: Tpv[]
   tpv!: any
   tpvParam!: any
-  menuTPV: Tpv = { codigo: "MENU", descripcion: "MENÚ" }
+  menuTPV: Tpv = { codigo: "MENU", descripcion: "MENÚ BUFFET" }
   hasTPVParam: boolean = true
   correctTPV: boolean = true
 
@@ -35,13 +34,8 @@ export class HomepageTPVComponent implements OnInit {
   }
 
   showPlatos(busqueda: any) {
-    if (this.tpv == "") {
-      this.platosFiltradosArray = this.platosArray.filter(plato =>
+    this.platosFiltradosArray = this.platosArray.filter(plato =>
         plato.description.toUpperCase().indexOf(busqueda.toString().toUpperCase()) != -1)
-    } else {
-      this.platosFiltradosArray = this.platosFiltradoTPV.filter(plato =>
-        plato.description.toUpperCase().indexOf(busqueda.toString().toUpperCase()) != -1)
-    }
   }
 
   cambioTab() {
@@ -49,37 +43,11 @@ export class HomepageTPVComponent implements OnInit {
   }
 
   showAlergenos(selectedItems: string[]) {
-    if (this.tpv != '') {
-      if (selectedItems.length != 0) {
-        this.platosFiltradosArray = []
-        this.platosFiltradoTPV.forEach(
-          plato => plato.allergens.filter(
-            alergeno => {
-              if (selectedItems.includes(alergeno.alergenoEs) && !this.platosFiltradosArray.includes(plato)) {
-                this.platosFiltradosArray.push(plato)
-              }
-            }
-          )
-        )
-      } else {
-        this.platosFiltradosArray = this.platosFiltradoTPV
-      }
-    } else {
-      if (selectedItems.length != 0) {
-        this.platosFiltradosArray = []
-        this.platosArray.forEach(
-          plato => plato.allergens.filter(
-            alergeno => {
-              if (selectedItems.includes(alergeno.alergenoEs) && !this.platosFiltradosArray.includes(plato)) {
-                this.platosFiltradosArray.push(plato)
-              }
-            }
-          )
-        )
+    if (selectedItems.length != 0) {
+        this.platosFiltradosArray = this.platosArray.filter(p => !p.allergens.some(allergen => selectedItems.includes(allergen.alergenoEs)))
       } else {
         this.platosFiltradosArray = this.platosArray
       }
-    }
   }
 
   getLogo(): string {
@@ -127,18 +95,8 @@ export class HomepageTPVComponent implements OnInit {
         this.distinctTPVs.some(tpv => (tpv.codigo == this.tpvParam.toUpperCase()) ? this.correctTPV = true : this.correctTPV = false)
         this.platosService.getPlatos(this.hotel).subscribe({
           next: (platos) => {
-            this.platosArray = platos.filter(plato => plato.tpv?.codigo == this.tpvParam)
-            this.platosFiltradosArray = platos.filter(plato => plato.tpv?.codigo == this.tpvParam)
-            /*platos.forEach(p => (this.tpvs.includes(p.tpv!)) ? console.log('ya existe') : this.tpvs?.push(p.tpv!))
-            this.distinctTPVs = this.tpvs.filter(
-              (thing, i, arr) => arr.findIndex(t => t?.codigo === thing?.codigo) === i
-            );
-            this.distinctTPVs = this.distinctTPVs.map(tpv => {
-              if (tpv == null) {
-                return this.menuTPV
-              }
-              return tpv
-            })*/
+            this.platosArray = platos.filter(plato => (this.tpvParam.toUpperCase() == "COM") ? plato.tpv?.codigo == this.tpvParam || plato.type == Type.Menu : plato.tpv?.codigo == this.tpvParam)
+            this.platosFiltradosArray = platos.filter(plato => (this.tpvParam.toUpperCase() == "COM") ? plato.tpv?.codigo == this.tpvParam || plato.type == Type.Menu : plato.tpv?.codigo == this.tpvParam)
           },
           error: (error) => {
             this.mensajeError = 'Ha ocurrido un error a la hora de recoger los datos: ' + error.status + ' ' + error.statusText

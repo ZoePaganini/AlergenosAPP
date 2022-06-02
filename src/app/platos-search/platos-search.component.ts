@@ -43,7 +43,6 @@ export class PlatosSearchComponent implements OnInit {
   tpvFiltrado() {
     this.busqueda = ''
     this.selectedAlergenos = []
-    console.log(this.selectedTPV)
     this.tpvEvent.emit(this.selectedTPV)
   }
 

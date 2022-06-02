@@ -28,8 +28,6 @@ export class PlatoslistComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
     this.platosArraySlice = this.platosArray
     this.appendItems()
   }  

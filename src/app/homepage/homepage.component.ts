@@ -1,4 +1,3 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Plato, Tpv, Type } from '../plato';
@@ -24,7 +23,7 @@ export class HomepageComponent implements OnInit {
   distinctTPVs!: Tpv[]
   tpv!: any
   tpvParam!: any
-  menuTPV: Tpv = { codigo: "MENU", descripcion: "MENÚ" }
+  menuTPV: Tpv = { codigo: "MENU", descripcion: "MENÚ BUFFET" }
   hasTPVParam: boolean = false
   correctTPV: boolean = false
 
@@ -37,15 +36,8 @@ export class HomepageComponent implements OnInit {
   tpvPlatos(tpv: string) {
     this.tpv = tpv
     if (tpv != "") {
-      if (tpv == "MENU") {
-        this.platosFiltradoTPV = this.platosArray.filter(plato =>
-          plato.tpv?.codigo == null)
-        this.platosFiltradosArray = this.platosFiltradoTPV
-      } else {
-        this.platosFiltradoTPV = this.platosArray.filter(plato =>
-          plato.tpv?.codigo.includes(tpv))
-        this.platosFiltradosArray = this.platosFiltradoTPV
-      }
+      this.platosFiltradosArray = this.platosArray.filter(plato =>
+        plato.tpv?.codigo == this.tpv || (plato.type == Type.Menu && plato.tpv == null && this.tpv == "MENU"))
     }
     else {
       this.platosFiltradosArray = this.platosArray
@@ -53,39 +45,42 @@ export class HomepageComponent implements OnInit {
   }
   showPlatos(busqueda: any) {
     if (!this.tpv) {
-      this.platosFiltradosArray = this.platosArray.filter(plato =>
-        plato.description.toUpperCase().indexOf(busqueda.toString().toUpperCase()) != -1)
+      this.platosFiltradosArray = [...new Map(this.platosArray.map((item) => [item.item, item])).values()];
+      this.platosFiltradosArray = this.platosFiltradosArray.filter(plato =>
+        plato.description.toUpperCase().indexOf(busqueda.toString().toUpperCase()) != -1 )
     } else {
-      this.platosFiltradosArray = this.platosFiltradoTPV.filter(plato =>
-        plato.description.toUpperCase().indexOf(busqueda.toString().toUpperCase()) != -1)
+      this.platosFiltradosArray = this.platosArray.filter(plato =>
+        plato.description.toUpperCase().indexOf(busqueda.toString().toUpperCase()) != -1 && (plato.tpv?.codigo == this.tpv || (plato.type == Type.Menu && this.tpv == "MENU")))
     }
   }
 
   cambioTab() {
     this.platosFiltradosArray = this.platosArray
+    this.platosFiltradosArray = this.platosArray.filter(p => this.platosArray.some(p2 => p.description == p2.description))
   }
 
 
   showAlergenos(selectedItems: string[]) {
-    if (this.tpv) {
+    if (this.tpv && this.tpv != "") {
       if (selectedItems.length != 0) {
         this.platosFiltradosArray = []
-        this.platosFiltradosArray = this.platosFiltradoTPV.filter(p => !p.allergens.some(allergen => selectedItems.includes(allergen.alergenoEs)))
+        this.platosFiltradosArray = this.platosArray.filter(p => !p.allergens.some(allergen => selectedItems.includes(allergen.alergenoEs)) && (p.tpv?.codigo == this.tpv || p.type == Type.Menu && this.tpv == "MENU"))
       } else {
-        this.platosFiltradosArray = this.platosFiltradoTPV
+        this.platosFiltradosArray = this.platosArray.filter(p => p.tpv?.codigo == this.tpv || (p.type == Type.Menu && this.tpv == "MENU"))
       }
     } else {
       if (selectedItems.length != 0) {
         this.platosFiltradosArray = []
-        this.platosFiltradosArray = this.platosArray.filter(p => !p.allergens.some(allergen => selectedItems.includes(allergen.alergenoEs)))
+        this.platosFiltradosArray = [...new Map(this.platosArray.map((item) => [item.item, item])).values()];
+        this.platosFiltradosArray = this.platosFiltradosArray.filter(p => !p.allergens.some(allergen => selectedItems.includes(allergen.alergenoEs)))
       } else {
-        this.platosFiltradosArray = this.platosArray
+        this.platosFiltradosArray = [...new Map(this.platosArray.map((item) => [item.item, item])).values()];
       }
     }
   }
 
   getLogo(): string {
-    switch (this.hotel) {
+    switch (this.hotel) { 
       case '04':
       case '15': return this.logoAdults
       case '21': return this.logoJaumell
@@ -110,49 +105,27 @@ export class HomepageComponent implements OnInit {
     }
   }
 
-  getTPV(tpv: any){
-    if(tpv != null) {
-      this.tpvParam = tpv
-      this.hasTPVParam = true
-      console.log("Tiene parametro")
-    } else{
-      console.log("No tiene parametro")
-    }
-  }
-
   ngOnInit() {
     this.hotel = this.route.snapshot.params['hotel']
-    this.getTPV(this.route.snapshot.params['tpv'])
-    //(this.tpv != null) ? this.hasTPVParam = true : this.hasTPVParam = false
-    this.platosService.getPlatos(this.hotel).subscribe({
-      next: (platos) => {
-        this.platosArray = platos
-        this.platosFiltradosArray = platos
-        /*platos.forEach(p => (this.tpvs.includes(p.tpv!)) ? console.log('ya existe') : this.tpvs?.push(p.tpv!))
-        this.distinctTPVs = this.tpvs.filter(
-          (thing, i, arr) => arr.findIndex(t => t?.codigo === thing?.codigo) === i
-        );
-        this.distinctTPVs = this.distinctTPVs.map(tpv => {
-          if (tpv == null) {
-            return this.menuTPV
-          }
-          return tpv
-        })*/
-      },
-      error: (error) => {
-        this.mensajeError = 'Ha ocurrido un error a la hora de recoger los datos: ' + error.status + ' ' + error.statusText
-        console.log(error)
-      }
-    })
     this.platosService.getTPVs(this.hotel).subscribe({
       next: (tpvs) => {
         this.distinctTPVs = tpvs
+        this.distinctTPVs.push(this.menuTPV)
+        this.platosService.getPlatos(this.hotel).subscribe({
+          next: (platos) => {
+            this.platosArray = platos
+            this.platosFiltradosArray = platos
+          },
+          error: (error) => {
+            this.mensajeError = 'Ha ocurrido un error a la hora de recoger los datos: ' + error.status + ' ' + error.statusText
+            console.log(error)
+          }
+        });
       },
       error: (error) => {
         this.mensajeError = 'Ha ocurrido un error a la hora de recoger los datos de los TPVs: ' + error.status + ' ' + error.statusText
         console.log(error)
       }
     })
-
   }
 }

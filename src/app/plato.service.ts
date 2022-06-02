@@ -11,7 +11,7 @@ import { Plato, Tpv } from './plato';
 export class PlatoService {
 
   //private platosUrl = "https://alergenosapiviva.azurewebsites.net/api/Alergenos/"
-  private platosUrl = "https://localhost:7183/api/Alergenos/"
+  private platosUrl = "https://192.168.93.179:45455/api/Alergenos/"
 
   httpOptions = {
     headers: new HttpHeaders({
