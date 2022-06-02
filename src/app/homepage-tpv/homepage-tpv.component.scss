@@ -1,0 +1,19 @@
+$color-tema: var(--color-etiquetas);
+
+#contenedor {
+    max-width: 750px;
+}
+img {
+    width: 250px;
+    align-self: center;
+}
+
+#logo {
+    left: 50%;
+}
+.spinner-border {
+    color: $color-tema;
+    width: 75px;
+    height: 75px;
+    margin-top: 200px;
+}

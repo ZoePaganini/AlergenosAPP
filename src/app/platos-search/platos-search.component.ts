@@ -27,6 +27,7 @@ export class PlatosSearchComponent implements OnInit {
   @Output() public tabEvent = new EventEmitter()
   @Input() hotel!: string
   @Input() tpvs!: Tpv[]
+  @Input() hasTPVParam: boolean  = false
 
   busqueda: string = ''
   alergenos: any
@@ -41,6 +42,7 @@ export class PlatosSearchComponent implements OnInit {
 
   tpvFiltrado() {
     this.busqueda = ''
+    this.selectedAlergenos = []
     console.log(this.selectedTPV)
     this.tpvEvent.emit(this.selectedTPV)
   }

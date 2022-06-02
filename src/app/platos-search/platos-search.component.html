@@ -5,14 +5,7 @@
     </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
-  <div>
-    <!--<ng-multiselect-dropdown
-        placeholder="Seleccionar TPVs o Menú"
-        [settings]="tpvsConfig"
-        [data]="tpvs"
-        [(ngModel)]="selectedTPV"
-        (onSelect)="tpvFiltrado()"
-        (onDeSelect)="tpvFiltrado()"></ng-multiselect-dropdown> -->
+  <div *ngIf="hasTPVParam == false">
         <select class="container-sm form-select" [(ngModel)]="selectedTPV" (change)="tpvFiltrado()" aria-placeholder="Seleccionar todos los TPVs">
           <option value="" selected>Mostrar todos los TPVs</option>
           <option *ngFor="let tpv of tpvs" [value]="tpv.codigo">{{tpv.descripcion}}</option>
@@ -29,5 +22,6 @@
         [(ngModel)]="selectedAlergenos"
         (onSelect)="alergenosFiltrados()"
         (onDeSelect)="alergenosFiltrados()"></ng-multiselect-dropdown>      
+      <p class="text-center">Esto mostrará los platos que SÍ pueden comer</p>
   </div>   
 </div>

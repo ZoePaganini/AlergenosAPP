@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ErrorModalComponent } from './error-modal/error-modal.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { HomepageTPVComponent } from './homepage-tpv/homepage-tpv.component';
 
 
 
@@ -20,7 +21,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     PlatoslistComponent,
     PlatosSearchComponent,
     HomepageComponent,
-    ErrorModalComponent
+    ErrorModalComponent,
+    HomepageTPVComponent
   ],
   imports: [
     BrowserModule,
