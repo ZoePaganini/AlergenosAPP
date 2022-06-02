@@ -3,6 +3,12 @@ export interface Plato {
     description: string;
     type:        Type;
     allergens:   Allergen[];
+    tpv:         Tpv | null;
+}
+
+export interface Tpv {
+    codigo:      string;
+    descripcion: string;
 }
 
 export interface Allergen {

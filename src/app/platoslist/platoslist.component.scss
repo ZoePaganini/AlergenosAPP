@@ -2,6 +2,21 @@ $color-list-letra: var(--color-etiquetas);
 $color-list-fondo: var(--color-fondo);
 $color-flecha: var(--color-flecha);
 
+
+#alergenoLogo {
+    width: 35px;
+}
+
+.contenedor {
+    margin-left: 30px;
+    left: 50%;
+}
+
+.tipo {
+
+    text-align: right;
+}
+
 .accordion-button:not(.collapsed) {
     color: $color-list-letra;
     background-color: $color-list-fondo;
@@ -21,4 +36,10 @@ $color-flecha: var(--color-flecha);
 
 .idioma {
     width: 20px;
+}
+
+#svgAlergenos {
+    color: $color-list-letra;
+    background-color: $color-list-fondo;
+    box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
 }

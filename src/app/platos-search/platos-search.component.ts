@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { AlergenoEs } from '../plato';
+import { AlergenoEs, Tpv, Type } from '../plato';
 import { PlatoService } from '../plato.service';
 
 
@@ -23,17 +23,28 @@ export class PlatosSearchComponent implements OnInit {
 
   @Output() public buscarEvent = new EventEmitter<string>()
   @Output() public filtrosEvent = new EventEmitter<string[]>()
+  @Output() public tpvEvent = new EventEmitter<string>()
   @Output() public tabEvent = new EventEmitter()
   @Input() hotel!: string
+  @Input() tpvs!: Tpv[]
+  @Input() hasTPVParam: boolean  = false
 
   busqueda: string = ''
   alergenos: any
   selectedAlergenos = []
+  selectedTPV: string = ''
   dropdownConfig: IDropdownSettings = {}
+  tpvsConfig: IDropdownSettings = {}
 
   constructor(
     private platoService: PlatoService,
   ) { }
+
+  tpvFiltrado() {
+    this.busqueda = ''
+    this.selectedAlergenos = []
+    this.tpvEvent.emit(this.selectedTPV)
+  }
 
   buscarPlato() {
     this.buscarEvent.emit(this.busqueda)
@@ -43,6 +54,7 @@ export class PlatosSearchComponent implements OnInit {
   {
     this.busqueda = ''
     this.selectedAlergenos = []
+    this.selectedTPV = ''
     this.tabEvent.emit()
   }
 
@@ -51,7 +63,7 @@ export class PlatosSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.alergenos = Object.values(AlergenoEs).map(item => String(item));
+    this.alergenos = Object.values(AlergenoEs).map(item => String(item))
     this.dropdownConfig = {
       singleSelection: false,
       idField: '',
@@ -61,7 +73,18 @@ export class PlatosSearchComponent implements OnInit {
       enableCheckAll: false,
       searchPlaceholderText: 'Buscar alérgenos',
       noFilteredDataAvailablePlaceholderText: ''
-    };
+    }
+    this.tpvsConfig = {
+      singleSelection: true,
+      idField: 'codigo',
+      textField: 'descripcion',
+      allowSearchFilter: true,
+      enableCheckAll: false,
+      searchPlaceholderText: 'Buscar TPVs',
+      noFilteredDataAvailablePlaceholderText: '',
+      noDataAvailablePlaceholderText: '',
+      closeDropDownOnSelection: true
+    }
     this.temaHotel()
   }
 

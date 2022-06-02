@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Plato } from './plato';
+import { Plato, Tpv } from './plato';
 
 
 @Injectable({
@@ -10,8 +10,8 @@ import { Plato } from './plato';
 
 export class PlatoService {
 
-  private platosUrl = "http://192.168.93.179:45455/api/Alergenos/"
-
+  //private platosUrl = "https://alergenosapiviva.azurewebsites.net/api/Alergenos/"
+  private platosUrl = "https://192.168.93.179:45455/api/Alergenos/"
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -26,16 +26,8 @@ export class PlatoService {
     return this.http.get<Plato[]>(this.platosUrl + hotel)
   }
 
-
-  /*getPlato(plato: string): Observable<Plato> {
-    const url = `${this.platosUrl}+${plato}`;
-    return this.http.get<Plato>(url);
+  getTPVs(hotel: string): Observable<Tpv[]> {
+    return this.http.get<Tpv[]>(this.platosUrl + hotel + '/tpvs')
   }
 
-  searchPlatos(term: string): Observable<Plato[]> {
-    if (!term.trim()) {
-      return of([]);
-    }
-    return this.http.get<Plato[]>(`${this.platosUrl}/?name=${term}`);
-  }*/
 }
