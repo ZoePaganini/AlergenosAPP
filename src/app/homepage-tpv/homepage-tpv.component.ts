@@ -1,4 +1,3 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Plato, Tpv, Type } from '../plato';
@@ -21,7 +20,7 @@ export class HomepageTPVComponent implements OnInit {
   mensajeError!: string
   tpvs: Tpv[] = []
   distinctTPVs!: Tpv[]
-  tpv!: any
+  tpv!: Tpv
   tpvParam!: any
   menuTPV: Tpv = { codigo: "MENU", descripcion: "MENÚ BUFFET" }
   hasTPVParam: boolean = true
@@ -93,6 +92,7 @@ export class HomepageTPVComponent implements OnInit {
       next: (tpvs) => {
         this.distinctTPVs = tpvs
         this.distinctTPVs.some(tpv => (tpv.codigo == this.tpvParam.toUpperCase()) ? this.correctTPV = true : this.correctTPV = false)
+        this.distinctTPVs.forEach(tpv => (tpv.codigo == this.tpvParam.toUpperCase()) ? this.tpv = tpv : console.log("Uy"))
         this.platosService.getPlatos(this.hotel).subscribe({
           next: (platos) => {
             this.platosArray = platos.filter(plato => (this.tpvParam.toUpperCase() == "COM") ? plato.tpv?.codigo == this.tpvParam || plato.type == Type.Menu : plato.tpv?.codigo == this.tpvParam)

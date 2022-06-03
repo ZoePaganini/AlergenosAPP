@@ -28,6 +28,7 @@ export class PlatosSearchComponent implements OnInit {
   @Input() hotel!: string
   @Input() tpvs!: Tpv[]
   @Input() hasTPVParam: boolean  = false
+  @Input() tpv!: Tpv
 
   busqueda: string = ''
   alergenos: any
